@@ -8,6 +8,7 @@ on:
       - 'main'
       - '*-maintenance'
       - '*-dev'
+      - 'experimental-github-actions'
   pull_request:
     branches:
       - '*'
@@ -29,6 +30,7 @@ jobs:
     env:
       REALLY_GEM_UPDATE_SYSTEM: fromorbitjusttobesure
     steps:
+      - run: yes | sudo apt-get install git
       - uses: actions/checkout@v2
       - run: script/update_rubygems_and_install_bundler
       - run: script/clone_all_rspec_repos

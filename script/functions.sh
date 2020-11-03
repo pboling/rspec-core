@@ -105,9 +105,13 @@ function check_binstubs {
   local gems=""
 
   if [ ! -x ./bin/rspec ]; then
-    binstubs="$binstubs bin/rspec"
-    gems="$gems rspec-core"
-    success=1
+    if [ -x ./exe/rspec ]; then
+      cp ./exe/rspec ./bin/rspec
+    else
+      binstubs="$binstubs bin/rspec"
+      gems="$gems rspec-core"
+      success=1
+    fi
   fi
 
   if [ ! -x ./bin/rake ]; then
